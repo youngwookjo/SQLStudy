@@ -1,0 +1,42 @@
+1.다음중 실행이 되는 sql 문장은?
+
+①.select deptno 부서번호, avg(sal) 평균
+from emp
+group by 부서번호
+having 평균 >= 2000
+order by 부서번호 desc;
+
+②.select deptno 부서번호, avg(sal) 평균
+from emp
+group by deptno
+having 평균 >= 2000
+order by deptno desc;
+
+③.select deptno 부서번호, avg(sal) 평균
+from emp
+group by deptno
+having avg(sal) >= 2000
+order by 부서번호 desc;
+
+답3
+
+
+2. 매니저가 BLAKE인 사원들의 이름과 월급, 직장위치를 검색하시오.
+(emp 테이블과 self - join을 활용)
+
+
+답
+select e.ename, e.sal, d.loc
+from emp e, emp m, dept d
+where m.ename = 'BLAKE' and e.mgr = m.empno and e.deptno = d.deptno;
+
+
+3.직업이 ANALYST 인 사람의 부서 급여 합을 구시오.
+(SubQuery를 활용)
+
+답
+select sum(sal)
+from emp
+where deptno in (select deptno
+		from emp
+		where job = 'ANALYST');
